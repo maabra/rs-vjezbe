@@ -65,3 +65,5 @@ def remove(n):
     return n.quantize(rezultat(1)) if n == n.to_integral() else n.normalize()
 # Print the rezultat
 print(f'Rezultat: {rezultat}')
+
+print("Nesto")
