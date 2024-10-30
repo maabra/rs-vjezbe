@@ -66,4 +66,3 @@ def remove(n):
 # Print the rezultat
 print(f'Rezultat: {rezultat}')
 
-print("Nesto")
