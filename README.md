@@ -1,2 +1,2 @@
 # RS-test
-Početni repository
+Repo za vjeđbe s predmeta RS
