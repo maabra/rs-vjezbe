@@ -111,6 +111,7 @@ lista = unos_liste()
 print(grupiraj_po_paritetu(lista))
 
 '''
+Vj 12
 Napišite funkciju koja prima rječnik i vraća novi rječnik u kojem su ključevi i vrijednosti zamijenjeni.
 Primjer:rjecnik = {"ime": "Ivan", "prezime": "Ivić", "dob": 25}
 print(obrni_rjecnik(rjecnik))
