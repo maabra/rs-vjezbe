@@ -83,3 +83,53 @@ def brojanje(tekst):
     return brojač
 unos2 = input("Unesite tekst: ")
 print("Riječi u tekstu su:", brojanje(unos2))
+
+'''
+Vježba 11: Grupiranje elemenata po paritetu
+Napišite funkciju koja prima listu brojeva i vraća rječnik s dvije liste: jedna za parne brojeve, a druga za
+neparne brojeve.
+Primjer:
+lista = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+print(grupiraj_po_paritetu(lista))
+# {'parni': [2, 4, 6, 8, 10], 'neparni': [1, 3, 5, 7, 9]}
+'''
+def grupiraj_po_paritetu(lista):
+    rezultat = {'parni': [], 'neparni': []}
+    for broj in lista:
+        if broj % 2 == 0:
+            rezultat['parni'].append(broj) 
+        else:
+            rezultat['neparni'].append(broj) 
+    return rezultat
+
+def unos_liste():
+    unos = input("Unesite brojeve odvojene zarezom ali zajedno: ")
+    lista = [int(broj.strip()) for broj in unos.split(',')]
+    return lista
+
+lista = unos_liste()
+print(grupiraj_po_paritetu(lista))
+
+'''
+Napišite funkciju koja prima rječnik i vraća novi rječnik u kojem su ključevi i vrijednosti zamijenjeni.
+Primjer:rjecnik = {"ime": "Ivan", "prezime": "Ivić", "dob": 25}
+print(obrni_rjecnik(rjecnik))
+# {'Ivan': 'ime', 'Ivić': 'prezime', 25: 'dob'}
+'''
+def obrnuti_rjecnik(rjecnik):
+    obrnut_rjecnik = {}
+    for kljuc, vrijednost in rjecnik.items():
+        obrnut_rjecnik[vrijednost] = kljuc
+    return obrnut_rjecnik
+def unos_rjecnika():
+    rjecnik = {}
+    while True:
+        kljuc = input("Unesite ključ (ili samo Enter za kraj unosa u riječnik): ")
+        if kljuc == "":
+            break
+        vrijednost = input("Unesite vrijednost za ključ '{}': ".format(kljuc))
+        rjecnik[kljuc] = vrijednost
+    return rjecnik
+rjecnik = unos_rjecnika() 
+print("Originalni rječnik:", rjecnik)
+print("Obrnuti rječnik:", obrnuti_rjecnik(rjecnik))
