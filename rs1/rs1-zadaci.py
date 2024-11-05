@@ -54,6 +54,11 @@ Primjer:
 lista = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5]
 print(ukloni_duplikate(lista)) # [1, 2, 3, 4, 5]
 '''
+def ukloni_duplikate(lista):
+    return list(set(lista2))
+unos = input("Unesite elemente liste s duplikatimai odvojite ih zarezom: ")
+lista2 = [int(x.strip()) for x in unos.split(",")]
+print("Lista bez duplikata:", ukloni_duplikate(lista2))
 
 
 '''
@@ -67,3 +72,14 @@ print(brojanje_riječi(tekst))
 1, 'učenje': 1, 'i': 1, 'korištenje.': 1, 'vrlo': 1, 'popularan.': 1}
 
 '''
+def brojanje(tekst):
+    riječi = tekst.split()
+    brojač = {}
+    for riječ in riječi:
+        if riječ in brojač:
+            brojač[riječ] += 1
+        else:
+            brojač[riječ] = 1
+    return brojač
+unos2 = input("Unesite tekst: ")
+print("Riječi u tekstu su:", brojanje(unos2))
