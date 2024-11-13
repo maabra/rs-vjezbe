@@ -23,18 +23,18 @@ async def glasaj(request):
     # cesta greska 
     # if body in votes:
     if text in votes: 
-        votes(text) += 1
+        votes[text] += 1
         return web.json_response({"status":"zabiljezeno"})
     else:
         return web.json_response({"status":"nepoznato"})
     # print(body)
     # return web.Response(text="OK")
-async def rezultati(request):
+async def rezultati(request): 
     return web.json_response(votes)
 
 app = web.Application()
 app.add_routes([web.get('/', hello)])
 app.add_routes([web.post('/glasaj', glasaj)])
-app.add_routes([web.get('/', rezultati)])
+app.add_routes([web.get('/rezultati', rezultati)])
 
 web.run_app(app)
