@@ -13,12 +13,12 @@ votes: Dict[Union[str, bool], int] = {
     False: 0,
 }
 
-class Student(BaseModel):
-    ime: constr(min_length=1)
-    prezime: Optional(str) = None
-    datum_rodjenja: Optional(dt) = None
-    kolegiji: Optional(List(str(Literal("WA","PI","PROG","ELE")))) = None
-    smjer:Literal("TFPU","FIPU")
+# class Student(BaseModel):
+#     ime: constr(min_length=1)
+#     prezime: Optional(str) = None
+#     datum_rodjenja: Optional(dt) = None
+#     kolegiji: Optional(List(str(Literal("WA","PI","PROG","ELE")))) = None
+#     smjer:Literal("TFPU","FIPU")
 
 
 st = """
