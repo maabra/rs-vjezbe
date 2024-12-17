@@ -1,0 +1,67 @@
+# Odlično, krenimo s pripremom okruženja korak po korak.
+
+# ### 1. Izrada novog Python virtualnog okruženja
+# Ako već nemate instaliran `virtualenv`, možete ga instalirati pomoću pip:
+# ```bash
+# pip install virtualenv
+# ```
+
+# Zatim izradite novo virtualno okruženje naziva `1_kolokvij`:
+# ```bash
+# virtualenv 1_kolokvij
+# ```
+
+# ### 2. Aktivacija virtualnog okruženja
+# Aktivirajte virtualno okruženje u terminalu:
+
+# - Na Windowsu:
+#   ```bash
+#   .\1_kolokvij\Scripts\activate
+#   ```
+
+# - Na MacOS/Linuxu:
+#   ```bash
+#   source 1_kolokvij/bin/activate
+#   ```
+
+# ### 3. Instalacija biblioteka
+# Instalirajte potrebne biblioteke `asyncio` i `aiohttp`:
+# ```bash
+# pip install aiohttp
+# ```
+
+# ### 4. Kreiranje foldera `elections`
+# Unutar radnog okruženja kreirajte novi folder naziva `elections`:
+# ```bash
+# mkdir elections
+# ```
+
+# ### 5. Pohrana instaliranih paketa
+# Pohranite instalirane pakete unutar `requirements.txt` datoteke:
+# ```bash
+# pip freeze > requirements.txt
+# ```
+
+# ### 6. Definiranje jednostavnog aiohttp web servera
+# Unutar foldera `elections`, napravite novu datoteku `index.py` i definirajte jednostavan `aiohttp` web server:
+
+# ```python
+# # elections/index.py
+
+from aiohttp import web
+
+async def handle(request):
+    return web.Response(text="Hello, aiohttp server!")
+
+app = web.Application()
+app.add_routes([web.get('/', handle)])
+
+if __name__ == '__main__':
+    web.run_app(app, port=8080)
+
+
+# ### Pokretanje servera
+# Pokrenite web server:
+# ```bash
+# python elections/index.py
+# ```
