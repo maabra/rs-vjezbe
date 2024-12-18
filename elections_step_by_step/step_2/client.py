@@ -1,5 +1,3 @@
-# elections/client.py
-
 import aiohttp
 import asyncio
 

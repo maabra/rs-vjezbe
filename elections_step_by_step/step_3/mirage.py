@@ -1,5 +1,3 @@
-# elections/mirage.py
-
 import aiohttp
 import asyncio
 import random

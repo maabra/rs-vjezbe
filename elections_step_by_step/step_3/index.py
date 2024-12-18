@@ -1,5 +1,3 @@
-# elections/index.py
-
 from aiohttp import web
 
 # Rječnik za pohranjivanje glasova

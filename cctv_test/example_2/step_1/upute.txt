@@ -1,0 +1,114 @@
+Razumijem, izmijenit ćemo naziv okruženja i direktorija. Krenimo s novim nazivom `cctv`.
+
+### Priprema okruženja (5 bodova)
+
+1. **Izrada virtualnog okruženja:**
+   - Kreirajte novo Python virtualno okruženje naziva `cctv`.
+   - Koristite `virtualenv` ili `venv` za izradu virtualnog okruženja:
+     ```bash
+     python -m venv cctv
+     ```
+
+2. **Aktivacija virtualnog okruženja:**
+   - Aktivirajte virtualno okruženje:
+     - Na Windowsu:
+       ```bash
+       .\cctv\Scripts\activate
+       ```
+     - Na MacOS/Linuxu:
+       ```bash
+       source cctv/bin/activate
+       ```
+
+3. **Instalacija paketa `aiohttp`:**
+   - Instalirajte `aiohttp` unutar aktiviranog virtualnog okruženja:
+     ```bash
+     pip install aiohttp
+     ```
+
+4. **Kreiranje direktorija i datoteka:**
+   - Unutar radnog okruženja kreirajte novi direktorij naziva `cctv`:
+     ```bash
+     mkdir cctv
+     ```
+   - Unutar direktorija `cctv`, kreirajte osnovnu Python datoteku `cctv.py`:
+     ```bash
+     touch cctv/cctv.py
+     ```
+
+### Razvoj osnovnih funkcionalnosti (10 bodova)
+
+1. **Definiranje klase `CCTV_frame`:**
+   - Unutar datoteke `cctv.py`, definirajte klasu `CCTV_frame` s atributima:
+     - `frame_id`
+     - `location_x`
+     - `location_y`
+     - `frame_rate`
+     - `camera_status`
+     - `zoom_level`
+     - `ip_address`
+
+2. **Implementacija konstruktora:**
+   - Implementirajte konstruktor koji postavlja vrijednosti atributa klase.
+
+3. **Implementacija metode `info`:**
+   - Implementirajte metodu `info` koja ispisuje informacije o trenutnom stanju kamere u formatu:
+     ```plaintext
+     Frame ID: _, Location: (x, y), Frame rate: 30, Camera status: _, Zoom level: 1x, IP address: _
+     ```
+
+4. **Kreiranje instance i pozivanje metode `info`:**
+   - U datoteci `index.py` (unutar direktorija `cctv`) kreirajte instancu klase `CCTV_frame` i pozovite metodu `info` nad instancom.
+
+### Primjer implementacije
+
+#### cctv.py
+
+```python
+# cctv/cctv.py
+
+class CCTV_frame:
+    def __init__(self, frame_id, location_x, location_y, frame_rate, camera_status, zoom_level, ip_address):
+        self.frame_id = frame_id
+        self.location_x = location_x
+        self.location_y = location_y
+        self.frame_rate = frame_rate
+        self.camera_status = camera_status
+        self.zoom_level = zoom_level
+        self.ip_address = ip_address
+
+    def info(self):
+        return (f"Frame ID: {self.frame_id}, Location: ({self.location_x}, {self.location_y}), "
+                f"Frame rate: {self.frame_rate}, Camera status: {self.camera_status}, "
+                f"Zoom level: {self.zoom_level}x, IP address: {self.ip_address}")
+```
+
+#### index.py
+
+```python
+# cctv/index.py
+
+from cctv import CCTV_frame
+
+def main():
+    cctv_frame = CCTV_frame(
+        frame_id=1,
+        location_x=100,
+        location_y=200,
+        frame_rate=30,
+        camera_status="Active",
+        zoom_level=1,
+        ip_address="192.168.1.1"
+    )
+    print(cctv_frame.info())
+
+if __name__ == '__main__':
+    main()
+```
+
+### Pokretanje koda
+
+1. Pokrenite `index.py` kako biste testirali implementaciju:
+   ```bash
+   python cctv/index.py
+   ```
