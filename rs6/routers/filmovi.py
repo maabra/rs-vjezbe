@@ -1,48 +1,35 @@
-from fastapi import APIRouter, HTTPException, Query
 import json
 from pathlib import Path
-from models.vrste import Movie
+from fastapi import APIRouter, HTTPException
+from models.film import Film
 from typing import List, Optional
+#import json
 
 router = APIRouter()
 
-MOVIES_FILE = Path("Film.JSON").resolve() 
+DATA_PATH = Path("rs6") / "Film.JSON"
 
-try:
-    with open(MOVIES_FILE, "r", encoding="utf-8") as f:
-        movies_data = json.load(f)
-except FileNotFoundError:
-    print(f"[ERROR] JSON datoteka nije pronađena na lokaciji: {MOVIES_FILE}, ali nastavljamo bez nje.")
-    movies_data = []
+if DATA_PATH.exists():
+    with open(DATA_PATH, "r", encoding="utf-8") as file:
+        films_data = json.load(file)
 
-@router.get("/movies", response_model=List[Movie])
-def get_movies(
-    min_year: Optional[int] = Query(None, gt=1900),
-    max_year: Optional[int] = Query(None, lt=2100),
-    min_rating: Optional[float] = Query(None, ge=0, le=10),
-    max_rating: Optional[float] = Query(None, ge=0, le=10),
-    type: Optional[str] = Query(None)
-):
-    filtered_movies = [
-        movie for movie in movies_data
-        if (not min_year or movie["Year"] >= min_year)
-        and (not max_year or movie["Year"] <= max_year)
-        and (not min_rating or movie["imdbRating"] >= min_rating)
-        and (not max_rating or movie["imdbRating"] <= max_rating)
-        and (not type or movie["type"] == type)
-    ]
-    return filtered_movies
+films = [Film(**film) for film in films_data]
 
-@router.get("/movies/{imdbID}", response_model=Movie)
-def get_movie(imdbID: str):
-    movie = next((m for m in movies_data if m["imdbID"] == imdbID), None)
-    if movie is None:
-        raise HTTPException(status_code=404, detail="Movie not found")
-    return movie
+@router.get("/films", response_model=List[Film])
+def get_films():
+    return films
 
-@router.get("/movies/title/{title}", response_model=Movie)
-def get_movie_by_title(title: str):
-    movie = next((m for m in movies_data if m["Title"].lower() == title.lower()), None)
-    if movie is None:
-        raise HTTPException(status_code=404, detail="Movie not found")
-    return movie
+@router.get("/films/{imdbID}", response_model=Film)
+def get_film_by_id(imdbID: str):
+    for film in films:
+        print("test")
+        if film.imdbID == imdbID:
+            return film
+    raise HTTPException(status_code=404, detail="Filma nema")
+
+@router.get("/films/title/{title}", response_model=List[Film])
+def get_film_by_title(title: str):
+    result = [film for film in films if film.Title.lower() == title.lower()]
+    if not result:
+        raise HTTPException(status_code=404, detail="Filma nema")
+    return result

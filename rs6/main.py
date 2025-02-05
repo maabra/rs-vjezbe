@@ -1,10 +1,13 @@
 from fastapi import FastAPI
-from routers.filmovi import router as filmovi_router
+from routers.filmovi import router
+
 
 app = FastAPI()
 
-try:
-    app.include_router(filmovi_router)
-except ImportError:
-    print("[WARNING] Problem - učitavanje ruta, aplikacija dalje radi.")
 
+@app.get("/", tags=["Root"])
+def read_root():
+    return {"message": "test"}
+
+# Uključivanje ruta
+app.include_router(router)
